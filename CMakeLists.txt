@@ -51,6 +51,18 @@ set(HEADER_LIST_LIB
         ${INCLUDE_DIR_LIB}/password-cracker.h
 )
 
+# Password Cracker Lib Path
+set(SOURCE_DIR_LIB_PROTO ${PROJECT_SOURCE_DIR}/protocol/src)
+set(INCLUDE_DIR_LIB_PROTO ${PROJECT_SOURCE_DIR}/protocol/include)
+
+# Password Cracker Files
+set(SOURCE_LIST_LIB_PROTO
+        ${SOURCE_DIR_LIB_PROTO}/protocol.c
+)
+set(HEADER_LIST_LIB_PROTO
+        ${INCLUDE_DIR_LIB_PROTO}/protocol.h
+)
+
 add_compile_definitions(_POSIX_C_SOURCE=200809L)
 add_compile_definitions(_XOPEN_SOURCE=700)
 add_compile_definitions(_GNU_SOURCE)
@@ -66,6 +78,8 @@ endif ()
 include_directories(${INCLUDE_DIR_CLIENT})
 include_directories(${INCLUDE_DIR_HOST})
 include_directories(${INCLUDE_DIR_LIB})
+include_directories(${INCLUDE_DIR_LIB_PROTO})
+
 include(CheckCCompilerFlag)
 
 function(AddCompileOptions)
@@ -217,6 +231,9 @@ add_executable(dpc-client ${SOURCE_MAIN_CLIENT} ${SOURCE_LIST_CLIENT} ${HEADER_L
 add_executable(dpc-host ${SOURCE_LIST_HOST} ${SOURCE_MAIN_HOST} ${HEADER_LIST_HOST})
 # Add the password cracker library
 add_library(password-cracker SHARED ${SOURCE_LIST_LIB} ${HEADER_LIST_LIB})
+
+# Add the protocol library
+add_library(protocol SHARED ${SOURCE_LIST_LIB_PROTO} ${HEADER_LIST_LIB_PROTO})
 
 target_include_directories(dpc-client PRIVATE include)
 target_include_directories(dpc-client PRIVATE /usr/local/include)
