@@ -1,0 +1,6 @@
+#ifndef DPC_CLIENT_CLIENT_PROTOCOL_H
+#define DPC_CLIENT_CLIENT_PROTOCOL_H
+
+int add(int a, int b);
+
+#endif //DPC_CLIENT_CLIENT_PROTOCOL_H
